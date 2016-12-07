@@ -10,6 +10,9 @@ namespace MarketingNotifications.Web.Models.Repository
     public interface ISubscribersRepository
     {
         Task<List<Subscriber>> FindActiveSubscribersAsync();
+        Task<List<Subscriber>> FindActiveBoatListSubscribersAsync();
+        Task<List<Subscriber>> FindActiveRvListSubscribersAsync();
+        Task<List<Subscriber>> FindActiveBridalListSubscribersAsync();
         Task<Subscriber> FindByPhoneNumberAsync(string phoneNumber);
         Task<int> CreateAsync(Subscriber subscriber);
         Task<int> UpdateAsync(Subscriber subscriber);
@@ -41,7 +44,12 @@ namespace MarketingNotifications.Web.Models.Repository
 
         public async Task<List<Subscriber>> FindActiveRvListSubscribersAsync()
         {
-            return await _context.Subscribers
+//            var query = from subscribed in _context.Subscribers
+//                        where ((subscribed.Subscribed == true) && (subscribed.Rv == true))
+//                        select subscribed;
+
+            return await
+                _context.Subscribers
                 .Where(s => s.Subscribed)
                 .Where(s => s.Rv)
                 .ToListAsync();

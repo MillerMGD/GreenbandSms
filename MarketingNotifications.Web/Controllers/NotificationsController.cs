@@ -33,17 +33,65 @@ namespace MarketingNotifications.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var subscribers = await _repository.FindActiveSubscribersAsync();
-                subscribers.ForEach(subscriber =>
+                if (model.Rv)
                 {
-                    _messageSender.Send(
-                        subscriber.PhoneNumber,
-                        model.Message,
-                        model.ImageUrl);
-                });
+                    var subscribers = await _repository.FindActiveRvListSubscribersAsync();
+                    subscribers.ForEach(subscriber =>
+                    {
+                        _messageSender.Send(
+                            subscriber.PhoneNumber,
+                            model.Message,
+                            model.ImageUrl);
+                    });
 
-                ModelState.Clear();
-                ViewBag.FlashMessage = "Messages on their way!";
+                    ModelState.Clear();
+                    ViewBag.FlashMessage = "Messages on their way!";
+                }
+
+                if (model.Boat)
+                {
+                    var subscribers = await _repository.FindActiveBoatListSubscribersAsync();
+                    subscribers.ForEach(subscriber =>
+                    {
+                        _messageSender.Send(
+                            subscriber.PhoneNumber,
+                            model.Message,
+                            model.ImageUrl);
+                    });
+
+                    ModelState.Clear();
+                    ViewBag.FlashMessage = "Messages on their way!";
+                }
+
+                if (model.Bridal)
+                {
+                    var subscribers = await _repository.FindActiveBridalListSubscribersAsync();
+                    subscribers.ForEach(subscriber =>
+                    {
+                        _messageSender.Send(
+                            subscriber.PhoneNumber,
+                            model.Message,
+                            model.ImageUrl);
+                    });
+
+                    ModelState.Clear();
+                    ViewBag.FlashMessage = "Messages on their way!";
+                }
+
+                else
+                {
+
+                    ViewBag.FlashMessage = "Please select a list.";
+//                    var subscribers = await _repository.FindActiveSubscribersAsync();
+//                    subscribers.ForEach(subscriber =>
+//                    {
+//                        _messageSender.Send(
+//                            subscriber.PhoneNumber,
+//                            model.Message,
+//                            model.ImageUrl);
+//                    });
+                }
+                
                 return View();
             }
 

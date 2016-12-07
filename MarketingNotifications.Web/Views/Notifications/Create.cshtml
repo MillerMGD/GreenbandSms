@@ -1,10 +1,18 @@
 ﻿@model MarketingNotifications.Web.ViewModels.NotificationViewModel
-
 <h1>SMS Notifications</h1>
 <p>Use this form to send MMS notifications to any subscribers.</p>
-
 @using (Html.BeginForm("Create", "Notifications"))
 {
+    <div class="form-group">
+        @Html.LabelFor(m => m.Rv)
+        @Html.CheckBoxFor(m => m.Rv)
+        <br />
+        @Html.LabelFor(m => m.Boat)
+        @Html.CheckBoxFor(m => m.Boat)
+        <br />
+        @Html.LabelFor(m => m.Bridal)
+        @Html.CheckBoxFor(m => m.Bridal)
+    </div>
     <div class="form-group">
         @Html.LabelFor(m => m.Message)
         @Html.TextBoxFor(m => m.Message, new { @class = "form-control", placeholder = "New things are happening!" })
@@ -13,7 +21,6 @@
     <div class="form-group">
         @Html.LabelFor(m => m.ImageUrl)
         @Html.TextBoxFor(m => m.ImageUrl, new { @class = "form-control", placeholder = "http://fake.twilio.com/some_image.png" })
-        @Html.
     </div>
     <button type="submit" class="btn btn-primary">Send Message</button>
 }
