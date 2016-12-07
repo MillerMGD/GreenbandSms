@@ -11,7 +11,9 @@ namespace MarketingNotifications.Web.Models.Repository
     {
         Task<List<Subscriber>> FindActiveSubscribersAsync();
         Task<List<Subscriber>> FindActiveBoatListSubscribersAsync();
+        Task<List<Subscriber>> FindActiveBoatAndRvListSubscribersAsync();
         Task<List<Subscriber>> FindActiveRvListSubscribersAsync();
+        Task<List<Subscriber>> FindActiveTestListSubscribersAsync();
         Task<List<Subscriber>> FindActiveBridalListSubscribersAsync();
         Task<Subscriber> FindByPhoneNumberAsync(string phoneNumber);
         Task<int> CreateAsync(Subscriber subscriber);
@@ -39,6 +41,16 @@ namespace MarketingNotifications.Web.Models.Repository
             return await _context.Subscribers
                 .Where(s => s.Subscribed)
                 .Where(s => s.Boat)
+                .ToListAsync();
+        }
+
+
+        public async Task<List<Subscriber>> FindActiveBoatAndRvListSubscribersAsync()
+        {
+            return await _context.Subscribers
+                .Where(s => s.Subscribed)
+                .Where(s => s.Boat)
+                .Where(s => s.Rv)
                 .ToListAsync();
         }
 

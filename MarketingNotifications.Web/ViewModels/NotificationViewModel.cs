@@ -13,33 +13,17 @@ namespace MarketingNotifications.Web.ViewModels
         [Display(Name = "Image URL")]
         public string ImageUrl { get; set; }
 
+        [Display(Name = "RV Show Subscribers")]
         public bool Rv { get; set; }
 
+        [Display(Name = "Boat Show Subscribers")]
         public bool Boat { get; set; }
 
+        [Display(Name = "Bridal Show Subscribers")]
         public bool Bridal { get; set; }
 
-//        protected void ClearTextBoxes(Control p1)
-//        {
-//            foreach (Control ctrl in p1.Controls)
-//            {
-//                if (ctrl is TextBox)
-//                {
-//                    TextBox t = ctrl as TextBox;
-//
-//                    if (t != null)
-//                    {
-//                        t.Text = String.Empty;
-//                    }
-//                }
-//                else
-//                {
-//                    if (ctrl.Controls.Count > 0)
-//                    {
-//                        ClearTextBoxes(ctrl);
-//                    }
-//                }
-//            }
-//        }
+        [Display(Name = "Test Group - Office Numbers")]
+        public bool TestGroup { get; set; }
+
     }
 }

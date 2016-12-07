@@ -33,7 +33,22 @@ namespace MarketingNotifications.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (model.Rv)
+                if (model.Rv && model.Boat)
+                {
+                    var subscribers = await _repository.FindActiveBoatAndRvListSubscribersAsync();
+                    subscribers.ForEach(subscriber =>
+                    {
+                        _messageSender.Send(
+                            subscriber.PhoneNumber,
+                            model.Message,
+                            model.ImageUrl);
+                    });
+
+                    ModelState.Clear();
+                    ViewBag.FlashMessage = "Messages on their way to Boat & RV Subscribers!";
+                }
+
+                else if (model.Rv)
                 {
                     var subscribers = await _repository.FindActiveRvListSubscribersAsync();
                     subscribers.ForEach(subscriber =>
@@ -45,10 +60,10 @@ namespace MarketingNotifications.Web.Controllers
                     });
 
                     ModelState.Clear();
-                    ViewBag.FlashMessage = "Messages on their way!";
+                    ViewBag.FlashMessage = "Messages on their way to RV Subscribers!";
                 }
 
-                if (model.Boat)
+                else if (model.Boat)
                 {
                     var subscribers = await _repository.FindActiveBoatListSubscribersAsync();
                     subscribers.ForEach(subscriber =>
@@ -60,10 +75,10 @@ namespace MarketingNotifications.Web.Controllers
                     });
 
                     ModelState.Clear();
-                    ViewBag.FlashMessage = "Messages on their way!";
+                    ViewBag.FlashMessage = "Messages on their way to Boat Subscribers!";
                 }
 
-                if (model.Bridal)
+                else if (model.Bridal)
                 {
                     var subscribers = await _repository.FindActiveBridalListSubscribersAsync();
                     subscribers.ForEach(subscriber =>
@@ -75,7 +90,22 @@ namespace MarketingNotifications.Web.Controllers
                     });
 
                     ModelState.Clear();
-                    ViewBag.FlashMessage = "Messages on their way!";
+                    ViewBag.FlashMessage = "Messages on their way to Bridal Subscribers!";
+                }
+
+                else if (model.TestGroup)
+                {
+                    var subscribers = await _repository.FindActiveTestListSubscribersAsync();
+                    subscribers.ForEach(subscriber =>
+                    {
+                        _messageSender.Send(
+                            subscriber.PhoneNumber,
+                            model.Message,
+                            model.ImageUrl);
+                    });
+
+                    ModelState.Clear();
+                    ViewBag.FlashMessage = "Messages on their way to Bridal Subscribers!";
                 }
 
                 else
