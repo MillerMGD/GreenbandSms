@@ -33,6 +33,7 @@ namespace MarketingNotifications.Web.Controllers
         {
             if (ModelState.IsValid)
             {
+                // sends to RV & Boat subcribers if both boxes are ticked, only 1 message sent to subcribers of both groups.
                 if (model.Rv && model.Boat)
                 {
                     var subscribers = await _repository.FindActiveBoatAndRvListSubscribersAsync();
@@ -48,6 +49,7 @@ namespace MarketingNotifications.Web.Controllers
                     ViewBag.FlashMessage = "Messages on their way to Boat & RV Subscribers!";
                 }
 
+                // sends to RV group only if RV group is ticked
                 else if (model.Rv)
                 {
                     var subscribers = await _repository.FindActiveRvListSubscribersAsync();
@@ -63,6 +65,7 @@ namespace MarketingNotifications.Web.Controllers
                     ViewBag.FlashMessage = "Messages on their way to RV Subscribers!";
                 }
 
+                // sends to Boat group only if Boat checkbox is ticked
                 else if (model.Boat)
                 {
                     var subscribers = await _repository.FindActiveBoatListSubscribersAsync();
@@ -78,6 +81,7 @@ namespace MarketingNotifications.Web.Controllers
                     ViewBag.FlashMessage = "Messages on their way to Boat Subscribers!";
                 }
 
+                //Sends to Bridal group only if Bridal group is ticked
                 else if (model.Bridal)
                 {
                     var subscribers = await _repository.FindActiveBridalListSubscribersAsync();
@@ -93,6 +97,7 @@ namespace MarketingNotifications.Web.Controllers
                     ViewBag.FlashMessage = "Messages on their way to Bridal Subscribers!";
                 }
 
+                // Sends to Test Group only if Test Group checkbox is ticked.
                 else if (model.TestGroup)
                 {
                     var subscribers = await _repository.FindActiveTestListSubscribersAsync();
@@ -112,6 +117,8 @@ namespace MarketingNotifications.Web.Controllers
                 {
 
                     ViewBag.FlashMessage = "Please select a list.";
+
+                    // Use this to send to ALL subscribers
 //                    var subscribers = await _repository.FindActiveSubscribersAsync();
 //                    subscribers.ForEach(subscriber =>
 //                    {
