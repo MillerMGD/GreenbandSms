@@ -2,7 +2,6 @@
 using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Web.UI;
 using MarketingNotifications.Web.Migrations;
 
 namespace MarketingNotifications.Web.Models.Repository
@@ -31,14 +30,16 @@ namespace MarketingNotifications.Web.Models.Repository
 
         public async Task<List<Subscriber>> FindActiveSubscribersAsync()
         {
-            return await _context.Subscribers
+            return await
+                _context.Subscribers
                 .Where(s => s.Subscribed)
                 .ToListAsync();
         }
 
         public async Task<List<Subscriber>> FindActiveBoatListSubscribersAsync()
         {
-            return await _context.Subscribers
+            return await 
+                _context.Subscribers
                 .Where(s => s.Subscribed)
                 .Where(s => s.Boat)
                 .ToListAsync();
@@ -47,7 +48,8 @@ namespace MarketingNotifications.Web.Models.Repository
 
         public async Task<List<Subscriber>> FindActiveBoatAndRvListSubscribersAsync()
         {
-            return await _context.Subscribers
+            return await 
+                _context.Subscribers
                 .Where(s => s.Subscribed)
                 .Where(s => s.Boat)
                 .Where(s => s.Rv)
@@ -56,10 +58,6 @@ namespace MarketingNotifications.Web.Models.Repository
 
         public async Task<List<Subscriber>> FindActiveRvListSubscribersAsync()
         {
-//            var query = from subscribed in _context.Subscribers
-//                        where ((subscribed.Subscribed == true) && (subscribed.Rv == true))
-//                        select subscribed;
-
             return await
                 _context.Subscribers
                 .Where(s => s.Subscribed)
@@ -69,7 +67,8 @@ namespace MarketingNotifications.Web.Models.Repository
 
         public async Task<List<Subscriber>> FindActiveBridalListSubscribersAsync()
         {
-            return await _context.Subscribers
+            return await 
+                _context.Subscribers
                 .Where(s => s.Subscribed)
                 .Where(s => s.Bridal)
                 .ToListAsync();
@@ -77,7 +76,8 @@ namespace MarketingNotifications.Web.Models.Repository
 
         public async Task<List<Subscriber>> FindActiveTestListSubscribersAsync()
         {
-            return await _context.Subscribers
+            return await 
+                _context.Subscribers
                 .Where(s => s.Subscribed)
                 .Where(s => s.TestGroup)
                 .ToListAsync();

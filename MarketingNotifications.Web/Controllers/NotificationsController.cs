@@ -33,20 +33,26 @@ namespace MarketingNotifications.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                // sends to RV & Boat subcribers if both boxes are ticked, only 1 message sent to subcribers of both groups.
-                if (model.Rv && model.Boat)
+                // Original code - Use this to send to ALL subscribers
+                /*
+                var subscribers = await _repository.FindActiveSubscribersAsync();
+                subscribers.ForEach(subscriber =>
                 {
-                    var subscribers = await _repository.FindActiveBoatAndRvListSubscribersAsync();
-                    subscribers.ForEach(subscriber =>
-                    {
-                        _messageSender.Send(
-                            subscriber.PhoneNumber,
-                            model.Message,
-                            model.ImageUrl);
-                    });
+                    _messageSender.Send(
+                        subscriber.PhoneNumber,
+                        model.Message,
+                        model.ImageUrl);
+                });
 
-                    ModelState.Clear();
-                    ViewBag.FlashMessage = "Messages on their way to Boat & RV Subscribers!";
+                ModelState.Clear();
+                ViewBag.FlashMessage = "Messages on their way to RV Subscribers!";
+                */
+
+                
+
+                if (!model.Rv && !model.Boat && !model.Bridal && !model.TestGroup)
+                {
+                    ViewBag.FlashMessage = "Please select a list.";
                 }
 
                 // sends to RV group only if RV group is ticked
@@ -110,23 +116,7 @@ namespace MarketingNotifications.Web.Controllers
                     });
 
                     ModelState.Clear();
-                    ViewBag.FlashMessage = "Messages on their way to Bridal Subscribers!";
-                }
-
-                else
-                {
-
-                    ViewBag.FlashMessage = "Please select a list.";
-
-                    // Use this to send to ALL subscribers
-//                    var subscribers = await _repository.FindActiveSubscribersAsync();
-//                    subscribers.ForEach(subscriber =>
-//                    {
-//                        _messageSender.Send(
-//                            subscriber.PhoneNumber,
-//                            model.Message,
-//                            model.ImageUrl);
-//                    });
+                    ViewBag.FlashMessage = "Messages on their way to TEST Group Subscribers!";
                 }
                 
                 return View();

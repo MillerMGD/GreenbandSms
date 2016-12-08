@@ -1,19 +1,19 @@
 ﻿@model MarketingNotifications.Web.ViewModels.NotificationViewModel
 <h1>Greenband SMS Marketing Form</h1>
 <p>Use this form to send MMS notifications to any subscribers.</p>
-<p>You may send to Boat & RV, but other lists must be sent individually.</p>
+<p>You may only send to 1 list at a time.</p>
 @using (Html.BeginForm("Create", "Notifications"))
 {
     <div class="form-group">
         @Html.CheckBoxFor(m => m.TestGroup)
         @Html.LabelFor(m => m.TestGroup)
-        <br />
+        <br/>
         @Html.CheckBoxFor(m => m.Rv)
         @Html.LabelFor(m => m.Rv)
-        <br />
+        <br/>
         @Html.CheckBoxFor(m => m.Boat)
         @Html.LabelFor(m => m.Boat)
-        <br />
+        <br/>
         @Html.CheckBoxFor(m => m.Bridal)
         @Html.LabelFor(m => m.Bridal)
     </div>
