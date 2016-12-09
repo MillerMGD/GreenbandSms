@@ -8,6 +8,8 @@ namespace MarketingNotifications.Web.ViewModels
     public class NotificationViewModel
     {
         [Required]
+        [DataType(DataType.MultilineText)]
+        [StringLength(160, ErrorMessage = "Text shoudln't be longer than 160 characters.")]
         public string Message { get; set; }
 
         [Display(Name = "Image URL")]
