@@ -17,6 +17,8 @@ namespace MarketingNotifications.Web.Models.Repository
         Task<Subscriber> FindByPhoneNumberAsync(string phoneNumber);
         Task<int> CreateAsync(Subscriber subscriber);
         Task<int> UpdateAsync(Subscriber subscriber);
+
+
     }
 
     public class SubscribersRepository : ISubscribersRepository

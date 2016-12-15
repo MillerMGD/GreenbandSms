@@ -6,16 +6,17 @@
 {
     <div class="form-group">
         @Html.CheckBoxFor(m => m.TestGroup)
-        @Html.LabelFor(m => m.TestGroup)
+        @Html.LabelFor(m => m.TestGroup): @ViewBag.CountTest, $@ViewBag.TestCost
         <br/>
         @Html.CheckBoxFor(m => m.Rv)
-        @Html.LabelFor(m => m.Rv)
+        @Html.LabelFor(m => m.Rv): @ViewBag.CountRv, $@ViewBag.RvCost
         <br/>
         @Html.CheckBoxFor(m => m.Boat)
-        @Html.LabelFor(m => m.Boat)
+        @Html.LabelFor(m => m.Boat): @ViewBag.CountBoat, $@ViewBag.BoatCost
+@*        <label>Boat Subscribers:</label> *@
         <br/>
         @Html.CheckBoxFor(m => m.Bridal)
-        @Html.LabelFor(m => m.Bridal)
+        @Html.LabelFor(m => m.Bridal): @ViewBag.CountBridal, $@ViewBag.BridalCost
     </div>
     <div class="form-group" >
         @Html.LabelFor(m => m.Message)

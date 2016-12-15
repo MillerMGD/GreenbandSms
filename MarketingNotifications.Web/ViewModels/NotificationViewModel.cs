@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using MarketingNotifications.Web.Models;
 
 namespace MarketingNotifications.Web.ViewModels
 {
@@ -26,6 +29,5 @@ namespace MarketingNotifications.Web.ViewModels
 
         [Display(Name = "Test Group - Office Numbers")]
         public bool TestGroup { get; set; }
-
     }
 }

@@ -1,6 +1,8 @@
-﻿using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 using MarketingNotifications.Web.Domain;
+using MarketingNotifications.Web.Migrations;
 using MarketingNotifications.Web.Models.Repository;
 using MarketingNotifications.Web.ViewModels;
 
@@ -17,6 +19,18 @@ namespace MarketingNotifications.Web.Controllers
 
         public NotificationsController(ISubscribersRepository repository, IMessageSender messageSender)
         {
+            using (var context = new MarketingNotificationsContext())
+            {
+                ViewBag.CountBoat = context.Subscribers.Count(s => s.Boat && s.Subscribed);
+                ViewBag.CountRV = context.Subscribers.Count(s => s.Rv && s.Subscribed);
+                ViewBag.CountBridal = context.Subscribers.Count(s => s.Bridal && s.Subscribed);
+                ViewBag.CountTest = context.Subscribers.Count(s => s.TestGroup && s.Subscribed);
+
+                ViewBag.BoatCost = (context.Subscribers.Count(s => s.Boat && s.Subscribed))*.0075;
+                ViewBag.RvCost = (context.Subscribers.Count(s => s.Rv && s.Subscribed))*.0075;
+                ViewBag.BridalCost = (context.Subscribers.Count(s => s.Bridal && s.Subscribed))*.0075;
+                ViewBag.TestCost = (context.Subscribers.Count(s => s.TestGroup && s.Subscribed))*.0075;
+            }
             _messageSender = messageSender;
             _repository = repository;
         }
@@ -26,7 +40,7 @@ namespace MarketingNotifications.Web.Controllers
         {
             return View();
         }
-
+        
         // POST: Notifications/Create
         [HttpPost]
         public async Task<ActionResult> Create(NotificationViewModel model)
