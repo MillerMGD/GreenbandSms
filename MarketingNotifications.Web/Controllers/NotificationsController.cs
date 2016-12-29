@@ -25,6 +25,8 @@ namespace MarketingNotifications.Web.Controllers
                 ViewBag.CountRV = context.Subscribers.Count(s => s.Rv && s.Subscribed);
                 ViewBag.CountBridal = context.Subscribers.Count(s => s.Bridal && s.Subscribed);
                 ViewBag.CountTest = context.Subscribers.Count(s => s.TestGroup && s.Subscribed);
+                ViewBag.CountNonSub = context.Subscribers.Count(s => !s.Subscribed);
+                ViewBag.CountSub = context.Subscribers.Count(s => s.Subscribed);
 
                 ViewBag.BoatCost = (context.Subscribers.Count(s => s.Boat && s.Subscribed))*.0075;
                 ViewBag.RvCost = (context.Subscribers.Count(s => s.Rv && s.Subscribed))*.0075;

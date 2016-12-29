@@ -6,23 +6,23 @@
 {
     <div class="form-group">
         @Html.CheckBoxFor(m => m.TestGroup)
-        @Html.LabelFor(m => m.TestGroup): @ViewBag.CountTest, $@ViewBag.TestCost
-        <br/>
+        @Html.LabelFor(m => m.TestGroup): @ViewBag.CountTest <i>($@ViewBag.TestCost)</i>
+        <br />
         @Html.CheckBoxFor(m => m.Rv)
-        @Html.LabelFor(m => m.Rv): @ViewBag.CountRv, $@ViewBag.RvCost
-        <br/>
+        @Html.LabelFor(m => m.Rv): @ViewBag.CountRv <i>($@ViewBag.RvCost)</i>
+        <br />
         @Html.CheckBoxFor(m => m.Boat)
-        @Html.LabelFor(m => m.Boat): @ViewBag.CountBoat, $@ViewBag.BoatCost
-@*        <label>Boat Subscribers:</label> *@
-        <br/>
+        @Html.LabelFor(m => m.Boat): @ViewBag.CountBoat <i>($@ViewBag.BoatCost)</i>
+        @*        <label>Boat Subscribers:</label> *@
+        <br />
         @Html.CheckBoxFor(m => m.Bridal)
-        @Html.LabelFor(m => m.Bridal): @ViewBag.CountBridal, $@ViewBag.BridalCost
+        @Html.LabelFor(m => m.Bridal): @ViewBag.CountBridal <i>($@ViewBag.BridalCost)</i>
     </div>
-    <div class="form-group" >
+    <div class="form-group">
         @Html.LabelFor(m => m.Message)
         <br />
         @Html.EditorFor(m => m.Message, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter Text Message Here", @maxLength = "160" } })
-@*        @Html.TextBoxFor(m => m.Message, new { @class = "form-control headline", placeholder = "Enter Text Message here.", maxlength = "150"})*@
+        @*        @Html.TextBoxFor(m => m.Message, new { @class = "form-control headline", placeholder = "Enter Text Message here.", maxlength = "150"})*@
         @Html.ValidationMessageFor(x => x.Message, "", new { @class = "text-danger" })
     </div>
     <div class="form-group">
@@ -30,4 +30,10 @@
         @Html.TextBoxFor(m => m.ImageUrl, new { @class = "form-control", placeholder = "http://fake.twilio.com/some_image.png" })
     </div>
     <button type="submit" class="btn btn-primary">Send Message</button>
+    <div>
+        <br />
+        Total Subscribers: @ViewBag.CountSub
+        <br/>
+        Total Unsubscribed: @ViewBag.CountNonSub
+    </div>
 }
